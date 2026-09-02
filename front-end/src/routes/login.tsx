@@ -26,7 +26,7 @@ function Login() {
     <main className="min-h-screen bg-background text-foreground">
       <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(420px,560px)]">
         <section
-          className="relative hidden overflow-hidden px-10 py-10 text-primary-foreground lg:flex lg:flex-col lg:justify-between xl:px-16"
+          className="login-orange-gradient relative hidden overflow-hidden px-10 py-10 text-primary-foreground lg:flex lg:flex-col lg:justify-between xl:px-16"
           style={{ background: "var(--gradient-header)" }}
         >
           <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full border border-white/15" />
@@ -71,8 +71,11 @@ function Login() {
             }`}
           >
             <div className="w-full">
-              <div key={isRegistering ? "register" : "login"} className="animate-fade-in">
-                <div className={isRegistering ? "mb-4" : "mb-9"}>
+              <div
+                key={isRegistering ? "register" : "login"}
+                className={isRegistering ? "login-panel-enter-right" : "login-panel-enter-left"}
+              >
+                <div className={isRegistering ? "mb-5" : "mb-9"}>
                   <h2 className="text-3xl font-bold tracking-tight text-foreground">
                     {isRegistering ? "Crie sua conta" : "Bem-vindo de volta"}
                   </h2>
@@ -84,7 +87,7 @@ function Login() {
                 </div>
 
                 <form
-                  className={isRegistering ? "space-y-3" : "space-y-5"}
+                  className={isRegistering ? "space-y-4" : "space-y-5"}
                   onSubmit={(event) => event.preventDefault()}
                 >
                   {isRegistering && (
@@ -103,7 +106,7 @@ function Login() {
                           type="text"
                           autoComplete="name"
                           placeholder="Digite seu nome completo"
-                          className={`${isRegistering ? "h-10" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
+                          className={`${isRegistering ? "h-11" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
                           required
                         />
                       </div>
@@ -125,7 +128,7 @@ function Login() {
                         type="email"
                         autoComplete="email"
                         placeholder="seu.nome@engebag.com.br"
-                        className={`${isRegistering ? "h-10" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
+                        className={`${isRegistering ? "h-11" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
                         required
                       />
                     </div>
@@ -156,7 +159,7 @@ function Login() {
                         type={showPassword ? "text" : "password"}
                         autoComplete={isRegistering ? "new-password" : "current-password"}
                         placeholder="Digite sua senha"
-                        className={`${isRegistering ? "h-10" : "h-12"} rounded-lg bg-card px-11 pr-12 text-sm shadow-(--shadow-card)`}
+                        className={`${isRegistering ? "h-11" : "h-12"} rounded-lg bg-card px-11 pr-12 text-sm shadow-(--shadow-card)`}
                         required
                       />
                       <button
@@ -192,8 +195,8 @@ function Login() {
                           name="password-confirmation"
                           type="password"
                           autoComplete="new-password"
-                          placeholder="Digite sua senha novamente"
-                          className={`${isRegistering ? "h-10" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
+                          placeholder="Confirme a sua senha"
+                          className={`${isRegistering ? "h-11" : "h-12"} rounded-lg bg-card pl-11 text-sm shadow-(--shadow-card)`}
                           required
                         />
                       </div>
@@ -213,14 +216,14 @@ function Login() {
 
                   <Button
                     type="submit"
-                    className={`${isRegistering ? "h-10" : "h-12"} w-full rounded-lg text-sm font-semibold`}
+                    className={`${isRegistering ? "h-11" : "h-12"} w-full rounded-lg text-sm font-semibold`}
                   >
                     {isRegistering ? "Cadastrar" : "Entrar na central"}
                     <ArrowRight className="h-4 w-4" strokeWidth={2} />
                   </Button>
                 </form>
 
-                <div className={isRegistering ? "mt-4" : "mt-7"}>
+                <div className={isRegistering ? "mt-5" : "mt-7"}>
                   <span className="text-sm text-muted-foreground">
                     {isRegistering ? "Já possui uma conta?" : "Ainda não possui acesso?"}
                   </span>
