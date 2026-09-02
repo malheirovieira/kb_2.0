@@ -1,67 +1,88 @@
-# Base de Conhecimento — Engebag
+# Portal de Conhecimento Engebag
 
-Front-end pronto (visual + interações) da Base de Conhecimento, gerado originalmente no
-[Lovable](https://lovable.dev) e ajustado para rodar localmente no VS Code.
+Front-end do portal interno da Engebag, construído com React, TypeScript, TanStack Start e Tailwind CSS.
 
-## Como rodar no VS Code
+## Pré-requisitos
 
-Pré-requisitos: [Node.js](https://nodejs.org) 20 ou superior (o projeto foi testado com Node 22).
+- Node.js 20 ou superior. O projeto foi validado com Node.js 22.
+- npm 10 ou superior, incluído nas versões atuais do Node.js.
 
-1. Abra a pasta do projeto no VS Code (`File > Open Folder...`).
-2. Abra um terminal integrado (`Terminal > New Terminal`) e instale as dependências:
+## Depois de baixar o projeto
 
-   ```sh
-   npm install
-   ```
-
-3. Rode o servidor de desenvolvimento:
-
-   ```sh
-   npm run dev
-   ```
-
-4. Abra o endereço que aparecer no terminal (algo como `http://localhost:3000`) no navegador.
-
-Qualquer alteração salva em arquivos dentro de `src/` atualiza a página automaticamente (hot reload).
-
-### Outros comandos úteis
+Abra um terminal na pasta raiz do projeto e execute:
 
 ```sh
-npm run build     # gera a versão de produção em .output/
-npm run preview   # roda localmente a versão de produção já buildada
-npm run lint      # checa problemas de código
-npm run format    # formata o código com Prettier
+cd front-end
+npm install
+npm run dev
 ```
 
-## O que já está funcionando no front-end
+Depois, abra o endereço mostrado no terminal, normalmente `http://localhost:3000`.
 
-- Abrir/fechar o menu lateral (botão de seta ao lado da busca).
-- Expandir categorias e subcategorias no menu lateral.
-- Abrir um artigo em aba (empilhando várias abas) e fechar cada aba pelo `X`.
-- Busca com `Ctrl + K` (ou `Cmd + K` no Mac): foca automaticamente o campo de busca de
-  qualquer lugar da tela, e digitar filtra os artigos existentes em tempo real, com um
-  dropdown de resultados clicáveis.
-- Cards de categorias na home, com contagem de artigos.
+O Vite atualiza a aplicação automaticamente quando arquivos dentro de `src/` são alterados.
 
-## Próximo passo: o back-end
+## Fluxo atual
 
-Hoje todo o conteúdo (categorias, subcategorias e artigos) é uma lista fixa dentro de
-`src/routes/index.tsx` (constantes `menu` e `categories`), e o texto de cada artigo é um
-placeholder genérico. Para ligar isso a dados reais, os pontos de entrada são:
+O dashboard inicial está temporariamente desativado. A aplicação utiliza este fluxo:
 
-- `menu` / `categories` em `src/routes/index.tsx`: hoje mockados, no futuro devem vir de uma
-  API/banco de dados.
-- O corpo do artigo (dentro do bloco `<article>`): hoje é um texto fixo, deve virar o
-  conteúdo real vindo do back-end.
-- O contador "X artigos" de cada categoria: hoje é um número fixo, deve refletir a contagem
-  real.
+```text
+/login -> /base-conhecimento
+```
 
-O projeto já usa `@tanstack/react-query`, então a forma mais natural de conectar dados reais
-é criando hooks de busca (`useQuery`) que substituem essas constantes.
+- `/login`: tela de login e cadastro visual. A autenticação ainda não está conectada ao backend.
+- `/base-conhecimento`: módulo com busca, categorias, subcategorias, artigos e suporte via WhatsApp.
+- `/`: redireciona para `/login` enquanto o dashboard estiver em stand-by.
 
-## Built with
+## Comandos úteis
 
-- TanStack Start
+Execute os comandos a partir de `front-end/`:
+
+```sh
+npm run dev       # inicia o servidor de desenvolvimento
+npm run build     # gera a versão de produção em .output/
+npm run preview   # executa a versão de produção localmente
+npm run lint      # verifica problemas de código
+npm run format    # formata os arquivos com Prettier
+```
+
+## Estrutura principal
+
+```text
+front-end/
+├── src/
+│   ├── components/              # componentes reutilizáveis
+│   ├── routes/
+│   │   ├── login.tsx             # login e cadastro visual
+│   │   ├── base-conhecimento.tsx # módulo da Base de Conhecimento
+│   │   └── index.tsx             # dashboard em stand-by
+│   ├── styles.css                # tokens visuais e estilos globais
+│   └── routeTree.gen.ts          # gerado automaticamente pelo TanStack Router
+├── package.json                  # dependências e scripts do front-end
+└── package-lock.json
+```
+
+## Dependências do projeto
+
+Este é um projeto Node.js, portanto não utiliza `requirements.txt`. As dependências ficam declaradas em:
+
+- `front-end/package.json` e `front-end/package-lock.json`;
+- `back-end/package.json` e `back-end/package-lock.json`.
+
+O backend ainda está em preparação e não deve ser iniciado como parte do fluxo atual. Quando a API for implementada, sua documentação de execução será adicionada aqui.
+
+## Próximos passos
+
+- Implementar a API de autenticação;
+- Conectar login e cadastro ao PostgreSQL;
+- Proteger o módulo da Base de Conhecimento com sessão autenticada;
+- Substituir dados mockados por dados da API;
+- Reativar o dashboard quando os módulos adicionais estiverem disponíveis.
+
+## Tecnologias
+
+- React 19
 - TypeScript
-- React
-- Tailwind CSS
+- TanStack Start e TanStack Router
+- Tailwind CSS 4
+- Vite
+- Lucide React

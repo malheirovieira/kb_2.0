@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Eye, EyeOff, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { useState } from "react";
 
@@ -21,18 +21,19 @@ export const Route = createFileRoute("/login")({
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="grid min-h-screen lg:grid-cols-[minmax(0,1fr)_minmax(420px,560px)]">
         <section
-          className="login-orange-gradient relative hidden overflow-hidden px-10 py-10 text-primary-foreground lg:flex lg:flex-col lg:justify-between xl:px-16"
+          className="relative hidden overflow-hidden px-10 py-10 text-primary-foreground lg:flex lg:flex-col lg:justify-between xl:px-16"
           style={{ background: "var(--gradient-header)" }}
         >
           <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full border border-white/15" />
           <div className="absolute -bottom-40 -left-24 h-105 w-105 rounded-full border border-white/10" />
 
-          <Link to="/" className="relative flex w-fit items-center gap-3">
+          <Link to="/login" className="relative flex w-fit items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15">
               <BookOpen className="h-6 w-6" strokeWidth={1.8} />
             </span>
@@ -57,7 +58,7 @@ function Login() {
         <section className="flex min-h-screen flex-col px-6 py-8 sm:px-10 lg:h-screen lg:min-h-0 lg:overflow-hidden lg:px-16 xl:px-24">
           <div className="flex items-center justify-between lg:justify-end">
             <Link
-              to="/"
+              to="/login"
               className="flex items-center gap-2 text-sm font-bold text-primary lg:hidden"
             >
               <BookOpen className="h-5 w-5" strokeWidth={1.8} />
@@ -88,7 +89,12 @@ function Login() {
 
                 <form
                   className={isRegistering ? "space-y-4" : "space-y-5"}
-                  onSubmit={(event) => event.preventDefault()}
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    if (!isRegistering) {
+                      navigate({ to: "/base-conhecimento" });
+                    }
+                  }}
                 >
                   {isRegistering && (
                     <div className="space-y-2">

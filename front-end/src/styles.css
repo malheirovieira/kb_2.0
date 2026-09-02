@@ -170,6 +170,7 @@
   }
 
   body {
+    margin: 0;
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
@@ -197,21 +198,17 @@
   }
 }
 
-@keyframes login-orange-gradient-shift {
-  0% {
-    background-position: 100% 50%;
+@keyframes module-page-enter {
+  from {
+    opacity: 0.92;
   }
-  50% {
-    background-position: 42% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+  to {
+    opacity: 1;
   }
 }
 
-.login-orange-gradient {
-  background-size: 240% 100%;
-  animation: login-orange-gradient-shift 14s ease-in-out infinite alternate;
+.module-page-enter {
+  animation: module-page-enter 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .login-panel-enter-right,
@@ -230,8 +227,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .login-orange-gradient {
-    animation: none;
+  .module-page-enter {
+    animation-duration: 1ms;
   }
 
   .login-panel-enter-right,
